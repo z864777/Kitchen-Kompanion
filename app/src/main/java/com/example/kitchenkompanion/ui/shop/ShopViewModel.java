@@ -1,16 +1,16 @@
-package com.example.kitchenkompanion.ui.notifications;
+package com.example.kitchenkompanion.ui.shop;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class ShopViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public ShopViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is shop fragment");
     }
 
     public LiveData<String> getText() {

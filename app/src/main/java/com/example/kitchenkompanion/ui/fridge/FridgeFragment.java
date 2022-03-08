@@ -1,4 +1,4 @@
-package com.example.kitchenkompanion.ui.dashboard;
+package com.example.kitchenkompanion.ui.fridge;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.kitchenkompanion.databinding.FragmentDashboardBinding;
+import com.example.kitchenkompanion.databinding.FragmentFridgeBinding;
 
-public class DashboardFragment extends Fragment {
+public class FridgeFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentFridgeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        FridgeViewModel fridgeViewModel =
+                new ViewModelProvider(this).get(FridgeViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textFridge;
+        fridgeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

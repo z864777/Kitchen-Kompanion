@@ -1,4 +1,4 @@
-package com.example.kitchenkompanion.ui.home;
+package com.example.kitchenkompanion.ui.recipes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.kitchenkompanion.databinding.FragmentHomeBinding;
+import com.example.kitchenkompanion.databinding.FragmentRecipesBinding;
 
-public class HomeFragment extends Fragment {
+public class RecipesFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentRecipesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        RecipesViewModel recipesViewModel =
+                new ViewModelProvider(this).get(RecipesViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentRecipesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textRecipes;
+        recipesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
