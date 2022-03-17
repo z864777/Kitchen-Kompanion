@@ -14,13 +14,15 @@ public class FridgeListAdapter extends BaseAdapter {
     String listfood[];
     int listimages[];
     String listfoodcount[];
+    int ownerimages[];
     LayoutInflater inflater;
 
-    public FridgeListAdapter(Context ctxt, String[] list, int[] image, String[] itemcount) {
+    public FridgeListAdapter(Context ctxt, String[] list, int[] image, String[] itemcount, int[] owner) {
         this.context = ctxt;
         this.listfood = list;
         this.listimages = image;
         this.listfoodcount = itemcount;
+        this.ownerimages = owner;
         inflater = LayoutInflater.from(ctxt);
     }
 
@@ -45,9 +47,11 @@ public class FridgeListAdapter extends BaseAdapter {
         TextView txtView = (TextView) view.findViewById(R.id.fridge_list_text);
         ImageView foodimage = (ImageView) view.findViewById(R.id.fridge_list_image);
         TextView countView = (TextView) view.findViewById(R.id.fridge_item_count);
+        ImageView ownerimage = (ImageView) view.findViewById(R.id.fridge_owner_image);
         txtView.setText(listfood[i]);
         foodimage.setImageResource(listimages[i]);
         countView.setText(listfoodcount[i]);
+        ownerimage.setImageResource(ownerimages[i]);
         return view;
     }
 }
