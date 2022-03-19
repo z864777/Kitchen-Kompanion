@@ -24,8 +24,6 @@ public class ShopFragment extends Fragment {
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textShop;
-        shopViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
