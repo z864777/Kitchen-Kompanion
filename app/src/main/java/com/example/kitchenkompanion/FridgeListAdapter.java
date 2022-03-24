@@ -26,6 +26,8 @@ public class FridgeListAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(ctxt);
     }
 
+    public String getItemName(int i) { return listfood[i]; }
+
     @Override
     public int getCount() {
         return listfood.length;
