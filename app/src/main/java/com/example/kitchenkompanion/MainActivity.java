@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     //Arrays for storing information in fridge list.
     //Can be accessed by any fragment
     //Data saved globally across entire app
-    //Add to lists by copying elements into temp array of size + 1, add new element in last spot, set these list = temp.clone()
+    //Add to lists by calling addToFridgeCommunal or addToFridgePrivate
     //Data for Communal Items
     public static String communal_items[] = {"Apple", "Banana", "Whole Milk", "Orange Juice", "Bread", "Cake", "Rice", "Chicken Breast"};
     public static int communal_images[] = {R.drawable.ic_food_apple, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp};
@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     //add to communal fridge list
     //call MainActivity(String item_name, String item_count) to add item_name and item_count
+    //Item_name should be a string of max length 15
+    //item_count should be in format (number + space + counter)
+    //Number being any number 1-999, space being " ", and counter being (None, Pound, Slice, Gal, Loaf)
+    //For counter = None, use a space " " (Ex "1  " followed by 2 spaces).
     public static void addToFridgeCommunal(String item_name, String item_count) {
         int list_background_image = R.drawable.communal_list_item;
         int food_image = R.drawable.ic_fridge_black_24dp;
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         communal_items_temp[0] = item_name;
         communal_count_temp[0] = item_count;
         communal_owner_images_temp[0] = list_background_image;
-        communal_images_temp[0] = food_image;
+        communal_images_temp[0] = setFoodImage(item_name);
         //update global references
         communal_items = communal_items_temp.clone();
         communal_count = communal_count_temp.clone();
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         communal_images = communal_images_temp.clone();
     }
 
+    //Add to private fridge list
+    //refer to notes above addToFridgeCommunal
     public static void addToFridgePrivate(String item_name, String item_count) {
         int list_background_image = R.drawable.private_list_owner1;
         int food_image = R.drawable.ic_fridge_black_24dp;
@@ -99,12 +105,25 @@ public class MainActivity extends AppCompatActivity {
         private_items_temp[0] = item_name;
         private_count_temp[0] = item_count;
         private_owner_images_temp[0] = list_background_image;
-        private_images_temp[0] = food_image;
+        private_images_temp[0] = setFoodImage(item_name);
         //update global references
         private_items = private_items_temp.clone();
         private_count = private_count_temp.clone();
         private_owner_images = private_owner_images_temp.clone();
         private_images = private_images_temp.clone();
+    }
+
+    //Called by addToFridgePrivate and addToFridgeCommunal
+    //Contains a list of hardcoded images to be used
+    //depending on the item name
+    private static int setFoodImage(String item_name) {
+        int food_image;
+        if (item_name.equalsIgnoreCase("Apple")) {
+            food_image = R.drawable.ic_food_apple;
+        } else {
+            food_image = R.drawable.ic_fridge_black_24dp;
+        }
+        return food_image;
     }
 
 }
