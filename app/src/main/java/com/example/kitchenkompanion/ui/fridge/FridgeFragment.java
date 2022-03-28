@@ -176,13 +176,13 @@ public class FridgeFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
-                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (private_list == true) {
                     //if duplicate item added, create warning
+                    item_count = item_count + " " + item_counter;
                     if (Arrays.asList(MainActivity.private_items).contains(item_name)) {
                         int length = MainActivity.private_items.length;
                         int i = 0;
@@ -218,6 +218,7 @@ public class FridgeFragment extends Fragment {
                         dialog.dismiss();
                     }
                 } else {
+                    item_count = item_count + " " + item_counter;
                     //if duplicate item added, create warning
                     if (Arrays.asList(MainActivity.communal_items).contains(item_name)) {
                         duplicateItemPopup(item_name, item_count, private_list);

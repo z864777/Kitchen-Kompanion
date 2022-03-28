@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -196,15 +197,16 @@ public class ShopFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
-                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (Arrays.asList(MainActivity.shopping_list).contains(item_name)) {
+                    item_count = item_count + " " + item_counter;
                     //if duplicate item added, create warning
                     duplicateItemPopup(item_name, item_count, private_list);
                 } else {
+                    item_count = item_count + " " + item_counter;
                     //add to shopping list
                     MainActivity.addToShoppingList(item_name, item_count, private_list);
                     viewShoppingList(view1);
