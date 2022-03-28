@@ -27,6 +27,32 @@ public class MainActivity extends AppCompatActivity {
     public static int private_images[] = {R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp};
     public static String private_count[] = {"1  ", "2 Pound", "2 Slice", "1 Gal", "3  ", "2 Pound", "1 Gal"};
     public static int private_owner_images[] = {R.drawable.private_list_owner1, R.drawable.private_list_owner1, R.drawable.private_list_owner2, R.drawable.private_list_owner3, R.drawable.private_list_owner3, R.drawable.private_list_owner4, R.drawable.private_list_owner4};
+    //Data for Shopping List
+    public static String shopping_list[] = {};
+    public static int shopping_list_images[] = {};
+    public static String shopping_count[] = {};
+    public static int shopping_owner_images[] = {};
+    //Data for the four preset Shopping Lists
+    public static String preset_list1[] = {"Spring Food 1", "Spring Food 2", "Spring Food 3"};
+    public static int preset_images1[] = {R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp, R.drawable.ic_fridge_black_24dp};
+    public static String preset_count1[] = {"1  ", "3 Slice", "12  "};
+    public static int preset_owner_images1[] = {R.drawable.communal_list_item, R.drawable.private_list_owner1, R.drawable.communal_list_item};
+    public static String preset_list2[] = {};
+    public static int preset_images2[] = {};
+    public static String preset_count2[] = {};
+    public static int preset_owner_images2[] = {};
+    public static String preset_list3[] = {};
+    public static int preset_images3[] = {};
+    public static String preset_count3[] = {};
+    public static int preset_owner_images3[] = {};
+    public static String preset_list4[] = {};
+    public static int preset_images4[] = {};
+    public static String preset_count4[] = {};
+    public static int preset_owner_images4[] = {};
+    public static String preset1_name = "Spring Session";
+    public static String preset2_name;
+    public static String preset3_name;
+    public static String preset4_name;
 
 
     private ActivityMainBinding binding;
@@ -124,6 +150,39 @@ public class MainActivity extends AppCompatActivity {
             food_image = R.drawable.ic_fridge_black_24dp;
         }
         return food_image;
+    }
+
+    public static void addToShoppingList(String item_name, String item_count, boolean private_list) {
+        int list_background_image;
+        int list_length = MainActivity.shopping_list.length;
+        //create lists of length + 1
+        String shopping_items_temp[] = new String[list_length + 1];
+        String shopping_count_temp[] = new String[list_length + 1];
+        int shopping_owner_images_temp[] = new int[list_length + 1];
+        int shopping_images_temp[] = new int[list_length + 1];
+        //copy elements to temp
+        for (int i = 0; i < list_length; i++) {
+            shopping_items_temp[i+1] = shopping_list[i];
+            shopping_count_temp[i+1] = shopping_count[i];
+            shopping_owner_images_temp[i+1] = shopping_owner_images[i];
+            shopping_images_temp[i+1] = shopping_list_images[i];
+        }
+
+        if (private_list) {
+            list_background_image = R.drawable.private_list_owner1;
+        } else {
+            list_background_image = R.drawable.communal_list_item;
+        }
+        //add new element
+        shopping_items_temp[0] = item_name;
+        shopping_count_temp[0] = item_count;
+        shopping_owner_images_temp[0] = list_background_image;
+        shopping_images_temp[0] = setFoodImage(item_name);
+        //update global references
+        shopping_list = shopping_items_temp.clone();
+        shopping_count = shopping_count_temp.clone();
+        shopping_owner_images = shopping_owner_images_temp.clone();
+        shopping_list_images = shopping_images_temp.clone();
     }
 
 }
