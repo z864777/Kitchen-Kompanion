@@ -263,7 +263,7 @@ public class ShopFragment extends Fragment {
         switch_list_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmPurchasePopup(name, count, index, finalPrivateList);
+                confirmPurchasePopup(name, MainActivity.shopping_count[index], index, finalPrivateList);
             }
         });
 
