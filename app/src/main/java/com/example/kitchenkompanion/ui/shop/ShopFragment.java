@@ -196,16 +196,17 @@ public class ShopFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
-                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (Arrays.asList(MainActivity.shopping_list).contains(item_name)) {
                     //if duplicate item added, create warning
+                    item_count = item_count + " " + item_counter;
                     duplicateItemPopup(item_name, item_count, private_list);
                 } else {
                     //add to shopping list
+                    item_count = item_count + " " + item_counter;
                     MainActivity.addToShoppingList(item_name, item_count, private_list);
                     viewShoppingList(view1);
                     dialog.dismiss();

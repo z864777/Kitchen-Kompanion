@@ -176,7 +176,6 @@ public class FridgeFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
-                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
@@ -184,6 +183,7 @@ public class FridgeFragment extends Fragment {
                 } else if (private_list == true) {
                     //if duplicate item added, create warning
                     if (Arrays.asList(MainActivity.private_items).contains(item_name)) {
+                        item_count = item_count + " " + item_counter;
                         int length = MainActivity.private_items.length;
                         int i = 0;
                         int curr_index;
@@ -207,12 +207,14 @@ public class FridgeFragment extends Fragment {
                         //if duplicate does not belong to user 1
                         //add item normally
                         if (dupe_found == false) {
+                            item_count = item_count + " " + item_counter;
                             MainActivity.addToFridgePrivate(item_name, item_count);
                             viewPrivateList(view1);
                             dialog.dismiss();
                         }
                     } else {
                         //add to private list
+                        item_count = item_count + " " + item_counter;
                         MainActivity.addToFridgePrivate(item_name, item_count);
                         viewPrivateList(view1);
                         dialog.dismiss();
@@ -220,9 +222,11 @@ public class FridgeFragment extends Fragment {
                 } else {
                     //if duplicate item added, create warning
                     if (Arrays.asList(MainActivity.communal_items).contains(item_name)) {
+                        item_count = item_count + " " + item_counter;
                         duplicateItemPopup(item_name, item_count, private_list);
                     } else {
                         //add to communal list
+                        item_count = item_count + " " + item_counter;
                         MainActivity.addToFridgeCommunal(item_name, item_count);
                         viewCommunalList(view1);
                         dialog.dismiss();
