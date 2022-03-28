@@ -334,12 +334,13 @@ public class FridgeFragment extends Fragment {
         switch_list_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                removeFridgeItem(index, finalPrivateList);
                 if (finalPrivateList) {
-                    MainActivity.addToFridgeCommunal(name, count);
+                    MainActivity.addToFridgeCommunal(name, MainActivity.private_count[index]);
+                    removeFridgeItem(index, finalPrivateList);
                     viewCommunalList(view1);
                 } else {
-                    MainActivity.addToFridgePrivate(name, count);
+                    MainActivity.addToFridgePrivate(name, MainActivity.communal_count[index]);
+                    removeFridgeItem(index, finalPrivateList);
                     viewPrivateList(view1);
                 }
                 dialog3.dismiss();
