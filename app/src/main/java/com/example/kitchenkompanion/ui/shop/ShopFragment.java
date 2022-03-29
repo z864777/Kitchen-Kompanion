@@ -98,6 +98,12 @@ public class ShopFragment extends Fragment {
     private Button close_empty;
     private TextView text1, text2;
 
+    //overwrite preset popup
+    private AlertDialog.Builder dialogBuilder9;
+    private AlertDialog dialog9;
+    private Button overwrite_button, cancel_overwrite;
+    private TextView overwrite_text;
+
 
     private FragmentShopBinding binding;
 
@@ -474,26 +480,40 @@ public class ShopFragment extends Fragment {
                     emptyPresetErrorPopup(flag);
                 } else
                 if (item_counter.equals("1")) {
-                    MainActivity.preset_list1 = MainActivity.shopping_list.clone();
-                    MainActivity.preset_images1 = MainActivity.shopping_list_images.clone();
-                    MainActivity.preset_count1 = MainActivity.shopping_count.clone();
-                    MainActivity.preset_owner_images1 = MainActivity.shopping_owner_images.clone();
-                    MainActivity.preset1_name = item_name;
-                    dialog6.dismiss();
+                    if (MainActivity.preset1_name.length() != 0) {
+                        overwritePresetPopup(1, item_name);
+                    } else {
+                        MainActivity.preset_list1 = MainActivity.shopping_list.clone();
+                        MainActivity.preset_images1 = MainActivity.shopping_list_images.clone();
+                        MainActivity.preset_count1 = MainActivity.shopping_count.clone();
+                        MainActivity.preset_owner_images1 = MainActivity.shopping_owner_images.clone();
+                        MainActivity.preset1_name = item_name;
+                        dialog6.dismiss();
+                    }
                 } else if (item_counter.equals("2")) {
-                    MainActivity.preset_list2 = MainActivity.shopping_list.clone();
-                    MainActivity.preset_images2 = MainActivity.shopping_list_images.clone();
-                    MainActivity.preset_count2 = MainActivity.shopping_count.clone();
-                    MainActivity.preset_owner_images2 = MainActivity.shopping_owner_images.clone();
-                    MainActivity.preset2_name = item_name;
-                    dialog6.dismiss();
+                    if (MainActivity.preset2_name.length() != 0) {
+                        overwritePresetPopup(2, item_name);
+                    } else {
+                        MainActivity.preset_list2 = MainActivity.shopping_list.clone();
+                        MainActivity.preset_images2 = MainActivity.shopping_list_images.clone();
+                        MainActivity.preset_count2 = MainActivity.shopping_count.clone();
+                        MainActivity.preset_owner_images2 = MainActivity.shopping_owner_images.clone();
+                        MainActivity.preset2_name = item_name;
+                        dialog6.dismiss();
+                    }
                 } else if (item_counter.equals("3")) {
-                    MainActivity.preset_list3 = MainActivity.shopping_list.clone();
-                    MainActivity.preset_images3 = MainActivity.shopping_list_images.clone();
-                    MainActivity.preset_count3 = MainActivity.shopping_count.clone();
-                    MainActivity.preset_owner_images3 = MainActivity.shopping_owner_images.clone();
-                    MainActivity.preset3_name = item_name;
-                    dialog6.dismiss();
+                    if (MainActivity.preset3_name.length() != 0) {
+                        overwritePresetPopup(3, item_name);
+                    } else {
+                        MainActivity.preset_list3 = MainActivity.shopping_list.clone();
+                        MainActivity.preset_images3 = MainActivity.shopping_list_images.clone();
+                        MainActivity.preset_count3 = MainActivity.shopping_count.clone();
+                        MainActivity.preset_owner_images3 = MainActivity.shopping_owner_images.clone();
+                        MainActivity.preset3_name = item_name;
+                        dialog6.dismiss();
+                    }
+                } else if (MainActivity.preset4_name.length() != 0) {
+                    overwritePresetPopup(4, item_name);
                 } else {
                     MainActivity.preset_list4 = MainActivity.shopping_list.clone();
                     MainActivity.preset_images4 = MainActivity.shopping_list_images.clone();
@@ -509,6 +529,75 @@ public class ShopFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog6.dismiss();
+            }
+        });
+    }
+
+    public void overwritePresetPopup(int index, String item_name) {
+        dialogBuilder9 = new AlertDialog.Builder(thisContext);
+        final View overwritePresetPopupView = getLayoutInflater().inflate(R.layout.shop_overwrite_preset_popup, null);
+        overwrite_button = (Button) overwritePresetPopupView.findViewById(R.id.confirm_button78);
+        cancel_overwrite = (Button) overwritePresetPopupView.findViewById(R.id.cancel_button78);
+        overwrite_text = (TextView) overwritePresetPopupView.findViewById(R.id.remove_confirm_text);
+
+        dialogBuilder9.setView(overwritePresetPopupView);
+        dialog9 = dialogBuilder9.create();
+        dialog9.show();
+
+        if (index == 1) {
+            overwrite_text.setText("Save Slot 1 Already Contains " + MainActivity.preset1_name + "\nAre You Sure You Want To Overwrite?");
+        } else if (index == 2) {
+            overwrite_text.setText("Save Slot 2 Already Contains " + MainActivity.preset2_name + "\nAre You Sure You Want To Overwrite?");
+        } else if (index == 3) {
+            overwrite_text.setText("Save Slot 3 Already Contains " + MainActivity.preset3_name + "\nAre You Sure You Want To Overwrite?");
+        } else {
+            overwrite_text.setText("Save Slot 4 Already Contains " + MainActivity.preset4_name + "\nAre You Sure You Want To Overwrite?");
+        }
+
+        overwrite_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (index == 1) {
+                    MainActivity.preset_list1 = MainActivity.shopping_list.clone();
+                    MainActivity.preset_images1 = MainActivity.shopping_list_images.clone();
+                    MainActivity.preset_count1 = MainActivity.shopping_count.clone();
+                    MainActivity.preset_owner_images1 = MainActivity.shopping_owner_images.clone();
+                    MainActivity.preset1_name = item_name;
+                    dialog6.dismiss();
+                    dialog9.dismiss();
+                } else if (index == 2) {
+                    MainActivity.preset_list2 = MainActivity.shopping_list.clone();
+                    MainActivity.preset_images2 = MainActivity.shopping_list_images.clone();
+                    MainActivity.preset_count2 = MainActivity.shopping_count.clone();
+                    MainActivity.preset_owner_images2 = MainActivity.shopping_owner_images.clone();
+                    MainActivity.preset2_name = item_name;
+                    dialog6.dismiss();
+                    dialog9.dismiss();
+                } else if (index == 3) {
+                    MainActivity.preset_list3 = MainActivity.shopping_list.clone();
+                    MainActivity.preset_images3 = MainActivity.shopping_list_images.clone();
+                    MainActivity.preset_count3 = MainActivity.shopping_count.clone();
+                    MainActivity.preset_owner_images3 = MainActivity.shopping_owner_images.clone();
+                    MainActivity.preset3_name = item_name;
+                    dialog6.dismiss();
+                    dialog9.dismiss();
+                } else {
+                    MainActivity.preset_list4 = MainActivity.shopping_list.clone();
+                    MainActivity.preset_images4 = MainActivity.shopping_list_images.clone();
+                    MainActivity.preset_count4 = MainActivity.shopping_count.clone();
+                    MainActivity.preset_owner_images4 = MainActivity.shopping_owner_images.clone();
+                    MainActivity.preset4_name = item_name;
+                    dialog6.dismiss();
+                    dialog9.dismiss();
+                }
+            }
+        });
+
+        cancel_overwrite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog6.dismiss();
+                dialog9.dismiss();
             }
         });
     }
