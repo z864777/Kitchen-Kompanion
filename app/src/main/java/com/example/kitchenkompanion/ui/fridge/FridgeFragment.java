@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ import com.example.kitchenkompanion.FridgeListAdapter;
 import com.example.kitchenkompanion.MainActivity;
 import com.example.kitchenkompanion.R;
 import com.example.kitchenkompanion.databinding.FragmentFridgeBinding;
+
+import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
@@ -101,7 +104,7 @@ public class FridgeFragment extends Fragment {
                 foodInfoPopup(curr_name, curr_count, curr_owner, curr_image, i);
             }
         });
-        //change color of buttons depeding on selected list
+        //change color of buttons depending on selected list
         Button communal_button = (Button) root.findViewById(R.id.fridge_list_communal_button);
         Button private_button = (Button) root.findViewById(R.id.fridge_list_private_button);
         global_communal = communal_button;
@@ -297,13 +300,147 @@ public class FridgeFragment extends Fragment {
         food_image.setImageResource(image);
 
         //hard-coded nutrition facts for certain items
+        //Also calculate expiration date based on purchase date
         if (name.equalsIgnoreCase("Apple")) {
-            food_nutrition.setText("\nCalories: 83 \n\nSugar: 10.4g \n\nFat: 0.2g \n\nCarbs: 13.8g");
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 4-6 Weeks" + "\n\nCalories: 83 \nSugar: 10.4g \nFat: 0.2g \nCarbs: 13.8g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 4-6 Weeks" + "\n\nCalories: 83 \nSugar: 10.4g \nFat: 0.2g \nCarbs: 13.8g");
+            }
+        } else if (name.equalsIgnoreCase("Banana")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 105 \nSugar: 14g \nFat: 0.4g \nCarbs: 27g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 105 \nSugar: 14g \nFat: 0.4g \nCarbs: 27g");
+            }
+        } else if (name.equalsIgnoreCase("Bread")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 67 \nProtein: 2g \nFat: 1g \nCarbs: 13g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 67 \nProtein: 2g \nFat: 1g \nCarbs: 13g");
+            }
+        } else if (name.equalsIgnoreCase("Broccoli")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 30 \nProtein: 2.5g \nFat: 0g \nCarbs: 6g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 30 \nProtein: 2.5g \nFat: 0g \nCarbs: 6g");
+            }
+        } else if (name.equalsIgnoreCase("Burger")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSodium: 396mg \nFat: 10.1g \nCarbs: 30.3g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSugar: 396mg \nFat: 10.1g \nCarbs: 30.3g");
+            }
+        } else if (name.equalsIgnoreCase("Cake")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 262 \nSugar: 28g \nFat: 12g \nCarbs: 38g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 262 \nSugar: 28g \nFat: 12g \nCarbs: 38g");
+            }
+        } else if (name.equalsIgnoreCase("Carrot")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-4 Weeks" + "\n\nCalories: 25 \nSugar: 3g \nFiber: 2g \nCarbs: 6g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-4 Weeks" + "\n\nCalories: 25 \nSugar: 3g \nFiber: 2g \nCarbs: 6g");
+            }
+        } else if (name.equalsIgnoreCase("Cheese")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 180mg");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 180mg");
+            }
+        } else if (name.equalsIgnoreCase("Cookie")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 6-8 Weeks" + "\n\nCalories: 160 \nSugar: 14g \nFat: 7g \nCarbs: 25g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 6-8 Weeks" + "\n\nCalories: 160 \nSugar: 14g \nFat: 7g \nCarbs: 25g");
+            }
+        } else if (name.equalsIgnoreCase("Corn")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 90 \nSugar: 5g \nFat: 1g \nCarbs: 19g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 90 \nSugar: 5g \nFat: 1g \nCarbs: 19g");
+            }
+        } else if (name.equalsIgnoreCase("Egg")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Weeks" + "\n\nCalories: 75 \nProtein: 7g \nFat: 5g \nCarbs: 0g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Weeks" + "\n\nCalories: 75 \nProtein: 7g \nFat: 5g \nCarbs: 0g");
+            }
+        } else if (name.equalsIgnoreCase("Flour")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-8 Months" + "\n\nCalories: 455 \nSugar: 0.3g \nFat: 1.2g \nCarbs: 95.4g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-8 Months" + "\n\nCalories: 455 \nSugar: 0.3g \nFat: 1.2g \nCarbs: 95.4g");
+            }
+        } else if (name.equalsIgnoreCase("Milk")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 300mg");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 300mg");
+            }
+        } else if (name.equalsIgnoreCase("Olive Oil")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Years" + "\n\nCalories: 120 \nSugar: 0g \nFat: 14g \nCarbs: 0g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Years" + "\n\nCalories: 120 \nSugar: 0g \nFat: 14g \nCarbs: 0g");
+            }
+        } else if (name.equalsIgnoreCase("Orange")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 60 \nSugar: 12g \nFat: 0g \nProtein: 1g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 60 \nSugar: 12g \nFat: 0g \nProtein: 1g");
+            }
+        } else if (name.equalsIgnoreCase("Peanut Butter")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Years" + "\n\nCalories: 188 \nSugar: 3.3g \nFat: 16.3g \nCarbs: 6g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Years" + "\n\nCalories: 188 \nSugar: 3.3g \nFat: 16.3g \nCarbs: 6g");
+            }
+        } else if (name.equalsIgnoreCase("Pizza")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-4 Days" + "\n\nCalories: 285 \nSugar: 3.8g \nFat: 10g \nCarbs: 36g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-4 Days" + "\n\nCalories: 285 \nSugar: 3.8g \nFat: 10g \nCarbs: 36g");
+            }
+        } else if (name.equalsIgnoreCase("Raw Beef")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 66mg \nFat: 20g \nCarbs: 0g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 66mg \nFat: 20g \nCarbs: 0g");
+            }
+        } else if (name.equalsIgnoreCase("Salt")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 5 Years" + "\n\nCalories: 0 \nSugar: 0g \nFat: 0g \nCarbs: 0g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 5 Years" + "\n\nCalories: 0 \nSugar: 0g \nFat: 0g \nCarbs: 0g");
+            }
+        } else if (name.equalsIgnoreCase("Soda")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 9 Months" + "\n\nCalories: 140 \nSugar: 39g \nFat: 0g \nCarbs: 39g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 9 Months" + "\n\nCalories: 140 \nSugar: 39g \nFat: 0g \nCarbs: 39g");
+            }
+        } else if (name.equalsIgnoreCase("Strawberry")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 32 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 32 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
+            }
+        } else if (name.equalsIgnoreCase("Watermelon")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 46 \nSugar: 9.4g \nFat: 0.2g \nCarbs: 11.5g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 46 \nSugar: 9.4g \nFat: 0.2g \nCarbs: 11.5g");
+            }
         } else {
             //default case, no hard coded item match
-            food_nutrition.setText("\nCalories: N/A \n\nSugar: N/A \n\nFat: N/A \n\nCarbs: N/A");
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: N/A" + "\n\nCalories: N/A \nSugar: N/A \nFat: N/A \nCarbs: N/A");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: N/A" + "\n\nCalories: N/A \nSugar: N/A \nFat: N/A \nCarbs: N/A");
+            }
         }
-
 
         dialogBuilder3.setView(foodInfoPopupView);
         dialog3 = dialogBuilder3.create();
@@ -539,6 +676,7 @@ public class FridgeFragment extends Fragment {
             String private_count_temp[] = new String[list_length - 1];
             int private_owner_images_temp[] = new int[list_length - 1];
             int private_images_temp[] = new int[list_length - 1];
+            String private_purchase_temp[] = new String[list_length - 1];
 
             for (int i = 0; i < list_length; i++) {
                 if (i != index) {
@@ -546,6 +684,7 @@ public class FridgeFragment extends Fragment {
                     private_count_temp[counter] = MainActivity.private_count[i];
                     private_owner_images_temp[counter] = MainActivity.private_owner_images[i];
                     private_images_temp[counter] = MainActivity.private_images[i];
+                    private_purchase_temp[counter] = MainActivity.private_purchase_dates[i];
                     counter = counter + 1;
                 }
             }
@@ -553,6 +692,7 @@ public class FridgeFragment extends Fragment {
             MainActivity.private_count = private_count_temp.clone();
             MainActivity.private_owner_images = private_owner_images_temp.clone();
             MainActivity.private_images = private_images_temp.clone();
+            MainActivity.private_purchase_dates = private_purchase_temp.clone();
 
             viewPrivateList(view1);
         } else {
@@ -562,6 +702,7 @@ public class FridgeFragment extends Fragment {
             String communal_count_temp[] = new String[list_length - 1];
             int communal_owner_images_temp[] = new int[list_length - 1];
             int communal_images_temp[] = new int[list_length - 1];
+            String communal_purchase_temp[] = new String[list_length-1];
 
             for (int i = 0; i < list_length; i++) {
                 if (i != index) {
@@ -569,6 +710,7 @@ public class FridgeFragment extends Fragment {
                     communal_count_temp[counter] = MainActivity.communal_count[i];
                     communal_owner_images_temp[counter] = MainActivity.communal_onwer_images[i];
                     communal_images_temp[counter] = MainActivity.communal_images[i];
+                    communal_purchase_temp[counter] = MainActivity.communal_purchase_dates[i];
                     counter = counter + 1;
                 }
             }
@@ -576,6 +718,7 @@ public class FridgeFragment extends Fragment {
             MainActivity.communal_count = communal_count_temp.clone();
             MainActivity.communal_onwer_images = communal_owner_images_temp.clone();
             MainActivity.communal_images = communal_images_temp.clone();
+            MainActivity.communal_purchase_dates = communal_purchase_temp.clone();
 
             viewCommunalList(view1);
         }
