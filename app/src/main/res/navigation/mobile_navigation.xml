@@ -22,4 +22,10 @@
         android:name="com.example.kitchenkompanion.ui.recipes.RecipesFragment"
         android:label="@string/title_recipes"
         tools:layout="@layout/fragment_recipes" />
+
+    <fragment
+        android:id="@+id/navigation_users"
+        android:name="com.example.kitchenkompanion.ui.users.UserFragment"
+        android:label="@string/title_users"
+        tools:layout="@layout/fragment_users" />
 </navigation>
