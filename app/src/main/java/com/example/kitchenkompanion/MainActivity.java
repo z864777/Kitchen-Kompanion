@@ -12,7 +12,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.kitchenkompanion.databinding.ActivityMainBinding;
 
-import java.util.Calendar;
+import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
     //Arrays for storing information in fridge list.
@@ -25,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
     public static String communal_count[] = {"1  " ,"2  ", "1 Gal", "2 Gal", "1 Loaf", "2 Slice", "3 Pound", "2  Pound"};
     public static int communal_onwer_images[] = {R.drawable.communal_list_item, R.drawable.communal_list_item, R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item};
     public static String communal_purchase_dates[] = {"03/29/22", "01/22/22", "01/02/22", "02/25/22", "03/12/22", "11/16/21", "03/28/22", "02/09/22"};
+//    public static ArrayList<String> communal_items = new ArrayList<String>(
+//            Arrays.asList("Apple", "Banana", "Milk", "Soda", "Bread", "Cake", "Flour", "Raw Beef"));
+//    public static ArrayList<Integer> communal_images = new ArrayList<Integer>(
+//            Arrays.asList(R.drawable.food_apple, R.drawable.food_banana, R.drawable.food_milk, R.drawable.food_soda, R.drawable.food_bread, R.drawable.food_cake, R.drawable.food_flour, R.drawable.food_raw_meat));
+//    public static ArrayList<String> communal_count = new ArrayList<String>(
+//            Arrays.asList("1  " ,"2  ", "1 Gal", "2 Gal", "1 Loaf", "2 Slice", "3 Pound", "2  Pound"));
+//    public static ArrayList<Integer> communal_onwer_images = new ArrayList<Integer>(
+//            Arrays.asList(R.drawable.communal_list_item, R.drawable.communal_list_item, R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item));
+//    public static ArrayList<String> communal_purchase_dates = new ArrayList<String>(
+//            Arrays.asList("03/29/22", "01/22/22", "01/02/22", "02/25/22", "03/12/22", "11/16/21", "03/28/22", "02/09/22"));
     //Data for Private Items
     public static String private_items[] = {"Cookie", "Pizza", "Burger", "Carrot", "Watermelon", "Cake", "Cheese"};
     public static int private_images[] = {R.drawable.food_cookie, R.drawable.food_pizza, R.drawable.food_burger, R.drawable.food_carrot, R.drawable.food_watermelon, R.drawable.food_cake, R.drawable.food_cheese};
@@ -115,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         communal_onwer_images = communal_owner_images_temp.clone();
         communal_images = communal_images_temp.clone();
         communal_purchase_dates = communal_purchase_temp.clone();
+//        communal_items.add(0, item_name);
+//        communal_count.add(0, item_count);
+//        communal_onwer_images.add(0, list_background_image);
+//        communal_images.add(0, setFoodImage(item_name));
+//        communal_purchase_dates.add(0, getDate());
     }
 
     //Add to private fridge list
