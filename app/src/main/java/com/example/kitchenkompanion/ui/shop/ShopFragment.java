@@ -2,6 +2,7 @@ package com.example.kitchenkompanion.ui.shop;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -620,6 +621,7 @@ public class ShopFragment extends Fragment {
         dialog7.show();
 
         if (MainActivity.preset_list1.length != 0) {
+            list_one_button.setAlpha((float)1);
             text_one.setText(MainActivity.preset1_name);
             list_one_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -634,9 +636,11 @@ public class ShopFragment extends Fragment {
             });
         } else {
             text_one.setText("Empty");
+            list_one_button.setAlpha((float).6);
         }
 
         if (MainActivity.preset_list2.length != 0) {
+            list_two_button.setAlpha((float)1);
             text_two.setText(MainActivity.preset2_name);
             list_two_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -651,9 +655,11 @@ public class ShopFragment extends Fragment {
             });
         } else {
             text_two.setText("Empty");
+            list_two_button.setAlpha((float).6);
         }
 
         if (MainActivity.preset_list3.length != 0) {
+            list_three_button.setAlpha((float)1);
             text_three.setText(MainActivity.preset3_name);
             list_three_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -668,9 +674,11 @@ public class ShopFragment extends Fragment {
             });
         } else {
             text_three.setText("Empty");
+            list_three_button.setAlpha((float).6);
         }
 
         if (MainActivity.preset_list4.length != 0) {
+            list_four_button.setAlpha((float)1);
             text_four.setText(MainActivity.preset4_name);
             list_four_button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -685,6 +693,7 @@ public class ShopFragment extends Fragment {
             });
         } else {
             text_four.setText("Empty");
+            list_four_button.setAlpha((float).6);
         }
 
         cancel_preset.setOnClickListener(new View.OnClickListener() {
