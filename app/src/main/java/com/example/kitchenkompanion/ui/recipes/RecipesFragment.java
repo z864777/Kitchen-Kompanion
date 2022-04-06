@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.kitchenkompanion.MainActivity;
+import com.example.kitchenkompanion.R;
+import com.example.kitchenkompanion.RecipeListAdapter;
 import com.example.kitchenkompanion.databinding.FragmentRecipesBinding;
 
 public class RecipesFragment extends Fragment {
@@ -24,8 +28,10 @@ public class RecipesFragment extends Fragment {
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textRecipes;
-        recipesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        ListView listView = (ListView) root.findViewById(R.id.recipe_list);
+        RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipes);
+        listView.setAdapter(rla);
+
         return root;
     }
 

@@ -15,6 +15,8 @@ import com.example.kitchenkompanion.databinding.ActivityMainBinding;
 import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
+    //Recipes
+    public static String recipes[] = {"Chocolate Chip Pancakes", "Taco Meat", "Lasagna", " Banana Bread", "Homemade Mac and Cheese", "Chicken Parmesan", "Classic Waffles", "Microwave Baked Potato", "Chicken Pot Pie"};
     //Arrays for storing information in fridge list.
     //Can be accessed by any fragment
     //Data saved globally across entire app
