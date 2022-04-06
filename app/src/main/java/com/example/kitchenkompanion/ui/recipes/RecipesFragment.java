@@ -29,7 +29,7 @@ public class RecipesFragment extends Fragment {
         View root = binding.getRoot();
 
         ListView listView = (ListView) root.findViewById(R.id.recipe_list);
-        RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipes);
+        RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipes, MainActivity.communal_onwer_images);
         listView.setAdapter(rla);
 
         return root;

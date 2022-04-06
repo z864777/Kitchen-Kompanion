@@ -16,7 +16,9 @@ import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
     //Recipes
-    public static String recipes[] = {"Chocolate Chip Pancakes", "Taco Meat", "Lasagna", " Banana Bread", "Homemade Mac and Cheese", "Chicken Parmesan", "Classic Waffles", "Microwave Baked Potato", "Chicken Pot Pie"};
+    public static String recipes[] = {"Chocolate Chip Pancakes", "Taco Meat", "Lasagna", "Banana Bread", "Homemade Mac and Cheese", "Chicken Parmesan", "Classic Waffles", "Microwave Baked Potato", "Chicken Pot Pie"};
+    public static int communal_owner_images[] = {R.drawable.communal_list_item, R.drawable.communal_list_item, R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item,R.drawable.communal_list_item};
+
     //Arrays for storing information in fridge list.
     //Can be accessed by any fragment
     //Data saved globally across entire app
