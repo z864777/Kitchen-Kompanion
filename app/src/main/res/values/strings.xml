@@ -4,4 +4,21 @@
     <string name="title_shop">Shopping List</string>
     <string name="title_recipes">Recipes</string>
     <string name="title_users">Users</string>
+
+    <string-array name="meal">
+        <item>All Meals</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+    </string-array>
+
+    <string-array name="filters">
+        <item>No Restrictions</item>
+        <item>No Cutting</item>
+        <item>No Stove</item>
+        <item>No Microwave</item>
+
+
+    </string-array>
+
 </resources>

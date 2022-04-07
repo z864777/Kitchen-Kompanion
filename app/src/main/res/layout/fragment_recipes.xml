@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.recipes.RecipesFragment">
 
+
     <ListView
         android:id="@+id/recipe_list"
         android:layout_width="match_parent"
@@ -19,4 +20,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/meal_spinner"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:entries="@array/meal"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/private_list_owner1"
+        app:layout_constraintBottom_toTopOf="@id/recipe_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Spinner
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:entries="@array/filters"
+        android:background="@drawable/private_list_owner1"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toTopOf="@id/recipe_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

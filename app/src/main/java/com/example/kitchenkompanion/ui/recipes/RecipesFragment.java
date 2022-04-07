@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.kitchenkompanion.MainActivity;
 import com.example.kitchenkompanion.R;
-import com.example.kitchenkompanion.RecipeListAdapter;
 import com.example.kitchenkompanion.databinding.FragmentRecipesBinding;
 
 public class RecipesFragment extends Fragment {

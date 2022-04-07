@@ -76,6 +76,8 @@
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1095" />
+        <entry key="app/src/main/res/drawable/ic_preset_list_four.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_preset_list_one.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_recipes_black_24dp.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_shop_black_24dp.xml" value="0.1095" />
         <entry key="app/src/main/res/layout/activity_fridge_list_view.xml" value="0.15070921985815602" />
@@ -87,6 +89,7 @@
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_recipes.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/spinner_recipe_meal_view.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/fridge_list_menu.xml" value="0.10729166666666666" />
       </map>
