@@ -206,7 +206,7 @@ public class ShopFragment extends Fragment {
                 }
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
-                if (item_name.isEmpty()|| item_count.isEmpty()) {
+                if (item_name.isEmpty() || item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (Arrays.asList(MainActivity.shopping_list).contains(item_name)) {
                     item_count = item_count + " " + item_counter;
@@ -740,7 +740,33 @@ public class ShopFragment extends Fragment {
         dialog5 = dialogBuilder5.create();
         dialog5.show();
 
-        purchase_message.setText("Confirm Purchase of " + item_count + " " + item_name);
+        //check if item exists in inventory list
+        boolean dupe_found = false;
+        if (private_list) {
+            //check if duplicate item exist in user 1's private list
+            for (int i = 0; i < MainActivity.private_items.length; i++) {
+                if (MainActivity.private_items[i].equals(item_name)
+                &&  MainActivity.private_owner_images[i] == R.drawable.private_list_owner1) {
+                    dupe_found = true;
+                    break;
+                }
+            }
+        } else {
+            //check if duplicate item exists in communal list
+            if (Arrays.asList(MainActivity.communal_items).contains(item_name)) {
+                dupe_found = true;
+            }
+        }
+
+        String temp_text = "";
+        if (dupe_found) {
+            if (private_list) {
+                temp_text = "Warning: \"" + item_name + "\" already exists in your private inventory.\n\n";
+            } else {
+                temp_text = "Warning: \"" + item_name + "\" already exists in the communal inventory.\n\n";
+            }
+        }
+        purchase_message.setText(temp_text + "Confirm Purchase of " + item_count.trim() + " " + item_name + "?");
 
         no_purchase_button.setOnClickListener(new View.OnClickListener() {
             @Override

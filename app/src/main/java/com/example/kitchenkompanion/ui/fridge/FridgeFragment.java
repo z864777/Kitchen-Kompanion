@@ -182,41 +182,26 @@ public class FridgeFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
+                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (private_list == true) {
-                    //if duplicate item added, create warning
-                    item_count = item_count + " " + item_counter;
-                    if (Arrays.asList(MainActivity.private_items).contains(item_name)) {
-                        int length = MainActivity.private_items.length;
-                        int i = 0;
-                        int curr_index;
-                        boolean dupe_found = false;
-                        //check if duplicate belongs to user 1
-                        while (i < length) {
-                            if (MainActivity.private_items[i].equals(item_name)) {
-                                curr_index = i;
-                                //if duplicate belongs to user 1, create error message
-                                if (MainActivity.private_owner_images[curr_index] == R.drawable.private_list_owner1) {
-                                    dupe_found = true;
-                                    duplicateItemPopup(item_name, item_count, private_list);
-                                    break;
-                                } else {
-                                    i = i + 1;
-                                }
-                            } else {
-                                i = i + 1;
-                            }
+                    boolean dupe_found = false;
+                    //check if duplicate belongs to user 1
+                    for (int i = 0; i < MainActivity.private_items.length; i++) {
+                        if (MainActivity.private_items[i].equals(item_name)
+                                &&  MainActivity.private_owner_images[i] == R.drawable.private_list_owner1) {
+                            dupe_found = true;
+                            break;
                         }
-                        //if duplicate does not belong to user 1
-                        //add item normally
-                        if (dupe_found == false) {
-                            MainActivity.addToFridgePrivate(item_name, item_count);
-                            viewPrivateList(view1);
-                            dialog.dismiss();
-                        }
+                    }
+                    //if duplicate does not belong to user 1
+                    //add item normally
+
+                    if (dupe_found == true) {
+                        duplicateItemPopup(item_name, item_count, private_list);
                     } else {
                         //add to private list
                         MainActivity.addToFridgePrivate(item_name, item_count);
@@ -224,7 +209,6 @@ public class FridgeFragment extends Fragment {
                         dialog.dismiss();
                     }
                 } else {
-                    item_count = item_count + " " + item_counter;
                     //if duplicate item added, create warning
                     if (Arrays.asList(MainActivity.communal_items).contains(item_name)) {
                         duplicateItemPopup(item_name, item_count, private_list);
