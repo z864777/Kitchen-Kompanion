@@ -202,6 +202,8 @@ public class MainActivity extends AppCompatActivity {
             food_image = R.drawable.food_soda;
         } else if (item_name.equalsIgnoreCase("Strawberry")) {
             food_image = R.drawable.food_strawberry;
+        } else if (item_name.equalsIgnoreCase("Tomato")) {
+            food_image = R.drawable.food_tomato;
         } else if (item_name.equalsIgnoreCase("Watermelon")) {
             food_image = R.drawable.food_watermelon;
         } else {

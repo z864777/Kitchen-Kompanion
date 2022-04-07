@@ -43,7 +43,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:drawableEnd="@android:drawable/arrow_down_float"
-        android:drawableColor="purple_200"
         />
 
 
