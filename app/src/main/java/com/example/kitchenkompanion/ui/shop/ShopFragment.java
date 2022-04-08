@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -116,6 +117,8 @@ public class ShopFragment extends Fragment {
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         view1 = root;
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         //create options menu for direct add and search buttons
         setHasOptionsMenu(true);
@@ -744,9 +747,19 @@ public class ShopFragment extends Fragment {
         boolean dupe_found = false;
         if (private_list) {
             //check if duplicate item exist in user 1's private list
+            int curr_user_background;
+            if (MainActivity.curr_user.equals("Charlie")) {
+                curr_user_background = R.drawable.private_list_owner1;
+            } else if (MainActivity.curr_user.equals("Max")) {
+                curr_user_background = R.drawable.private_list_owner2;
+            } else if (MainActivity.curr_user.equals("Zach")) {
+                curr_user_background = R.drawable.private_list_owner3;
+            } else {
+                curr_user_background = R.drawable.private_list_owner4;
+            }
             for (int i = 0; i < MainActivity.private_items.length; i++) {
                 if (MainActivity.private_items[i].equals(item_name)
-                &&  MainActivity.private_owner_images[i] == R.drawable.private_list_owner1) {
+                &&  MainActivity.private_owner_images[i] == curr_user_background) {
                     dupe_found = true;
                     break;
                 }
