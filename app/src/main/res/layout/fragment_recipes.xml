@@ -42,6 +42,7 @@
         app:layout_constraintBottom_toTopOf="@id/recipe_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+<<<<<<< HEAD
         android:text="EXPLORE" />
 
 <!--    <Spinner-->
@@ -55,6 +56,10 @@
 <!--        app:layout_constraintTop_toTopOf="parent"-->
 <!--        android:drawableEnd="@android:drawable/arrow_down_float"-->
 <!--        />-->
+=======
+        android:drawableEnd="@android:drawable/arrow_down_float"
+        />
+>>>>>>> c24d5baff0d51ebf2fd4d7558996f3de8258d3d7
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

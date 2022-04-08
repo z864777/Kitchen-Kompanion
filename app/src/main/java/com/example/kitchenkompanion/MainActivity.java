@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     public static String preset3_name = "";
     public static String preset4_name = "";
 
+    //by default charlie is logged in, can switch by logging into another account on users page
+    public static String curr_user = "Charlie";
+
 
     private ActivityMainBinding binding;
 
@@ -124,7 +127,16 @@ public class MainActivity extends AppCompatActivity {
     //Add to private fridge list
     //refer to notes above addToFridgeCommunal
     public static void addToFridgePrivate(String item_name, String item_count) {
-        int list_background_image = R.drawable.private_list_owner1;
+        int list_background_image;
+        if (MainActivity.curr_user.equals("Charlie")) {
+            list_background_image = R.drawable.private_list_owner1;
+        } else if (MainActivity.curr_user.equals("Max")) {
+            list_background_image = R.drawable.private_list_owner2;
+        } else if (MainActivity.curr_user.equals("Zach")) {
+            list_background_image = R.drawable.private_list_owner3;
+        } else {
+            list_background_image = R.drawable.private_list_owner4;
+        }
         int food_image = R.drawable.ic_fridge_black_24dp;
         int list_length = private_items.length;
         //create lists of length + 1
@@ -202,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
             food_image = R.drawable.food_soda;
         } else if (item_name.equalsIgnoreCase("Strawberry")) {
             food_image = R.drawable.food_strawberry;
+        } else if (item_name.equalsIgnoreCase("Tomato")) {
+            food_image = R.drawable.food_tomato;
         } else if (item_name.equalsIgnoreCase("Watermelon")) {
             food_image = R.drawable.food_watermelon;
         } else {
@@ -238,7 +252,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (private_list) {
-            list_background_image = R.drawable.private_list_owner1;
+            if (MainActivity.curr_user.equals("Charlie")) {
+                list_background_image = R.drawable.private_list_owner1;
+            } else if (MainActivity.curr_user.equals("Max")) {
+                list_background_image = R.drawable.private_list_owner2;
+            } else if (MainActivity.curr_user.equals("Zach")) {
+                list_background_image = R.drawable.private_list_owner3;
+            } else {
+                list_background_image = R.drawable.private_list_owner4;
+            }
         } else {
             list_background_image = R.drawable.communal_list_item;
         }

@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -44,6 +45,8 @@ public class RecipesFragment extends Fragment {
 
         binding = FragmentRecipesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         ListView listView = (ListView) root.findViewById(R.id.recipe_list);
         filterButton = root.findViewById(R.id.filterButton);

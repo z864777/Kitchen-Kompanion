@@ -5,6 +5,7 @@ import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,6 +38,8 @@ import com.example.kitchenkompanion.databinding.FragmentFridgeBinding;
 import org.w3c.dom.Text;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FridgeFragment extends Fragment {
     //global variables for the list and buttons
@@ -87,6 +91,8 @@ public class FridgeFragment extends Fragment {
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         view1 = root;
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         //create options menu for direct add and search buttons
         setHasOptionsMenu(true);
@@ -179,41 +185,37 @@ public class FridgeFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
+                item_count = item_count + " " + item_counter;
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (private_list == true) {
-                    //if duplicate item added, create warning
-                    item_count = item_count + " " + item_counter;
-                    if (Arrays.asList(MainActivity.private_items).contains(item_name)) {
-                        int length = MainActivity.private_items.length;
-                        int i = 0;
-                        int curr_index;
-                        boolean dupe_found = false;
-                        //check if duplicate belongs to user 1
-                        while (i < length) {
-                            if (MainActivity.private_items[i].equals(item_name)) {
-                                curr_index = i;
-                                //if duplicate belongs to user 1, create error message
-                                if (MainActivity.private_owner_images[curr_index] == R.drawable.private_list_owner1) {
-                                    dupe_found = true;
-                                    duplicateItemPopup(item_name, item_count, private_list);
-                                    break;
-                                } else {
-                                    i = i + 1;
-                                }
-                            } else {
-                                i = i + 1;
-                            }
+                    boolean dupe_found = false;
+                    //check if duplicate belongs to curr user
+                    int curr_user_background;
+                    if (MainActivity.curr_user.equals("Charlie")) {
+                        curr_user_background = R.drawable.private_list_owner1;
+                    } else if (MainActivity.curr_user.equals("Max")) {
+                        curr_user_background = R.drawable.private_list_owner2;
+                    } else if (MainActivity.curr_user.equals("Zach")) {
+                        curr_user_background = R.drawable.private_list_owner3;
+                    } else {
+                        curr_user_background = R.drawable.private_list_owner4;
+                    }
+
+                    for (int i = 0; i < MainActivity.private_items.length; i++) {
+                        if (MainActivity.private_items[i].equals(item_name)
+                                &&  MainActivity.private_owner_images[i] == curr_user_background) {
+                            dupe_found = true;
+                            break;
                         }
-                        //if duplicate does not belong to user 1
-                        //add item normally
-                        if (dupe_found == false) {
-                            MainActivity.addToFridgePrivate(item_name, item_count);
-                            viewPrivateList(view1);
-                            dialog.dismiss();
-                        }
+                    }
+                    //if duplicate does not belong to user 1
+                    //add item normally
+
+                    if (dupe_found == true) {
+                        duplicateItemPopup(item_name, item_count, private_list);
                     } else {
                         //add to private list
                         MainActivity.addToFridgePrivate(item_name, item_count);
@@ -221,7 +223,6 @@ public class FridgeFragment extends Fragment {
                         dialog.dismiss();
                     }
                 } else {
-                    item_count = item_count + " " + item_counter;
                     //if duplicate item added, create warning
                     if (Arrays.asList(MainActivity.communal_items).contains(item_name)) {
                         duplicateItemPopup(item_name, item_count, private_list);
@@ -263,30 +264,57 @@ public class FridgeFragment extends Fragment {
 
         boolean privateList = false;
 
+        switch_list_button.setVisibility(View.GONE);
+        remove_button.setVisibility(View.GONE);
+        increase_button.setVisibility(View.GONE);
+        decrease_button.setVisibility(View.GONE);
+
         //get communal or private list and owner
         if (owner != R.drawable.communal_list_item) {
             privateList = true;
-            if (owner == R.drawable.private_list_owner1) {
+            if (owner == R.drawable.private_list_owner1 && MainActivity.curr_user.equals("Charlie")) {
                 switch_list_button.setText("Switch to Communal");
-                food_owner.setText("User 1");
-            } else if (owner == R.drawable.private_list_owner2) {
-                switch_list_button.setVisibility(View.GONE);
-                remove_button.setVisibility(View.GONE);
-                increase_button.setVisibility(View.GONE);
-                decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 2");
-            } else if (owner == R.drawable.private_list_owner3) {
-                switch_list_button.setVisibility(View.GONE);
-                remove_button.setVisibility(View.GONE);
-                increase_button.setVisibility(View.GONE);
-                decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 3");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Charlie");
+            } else if (owner == R.drawable.private_list_owner2 && MainActivity.curr_user.equals("Max")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Max");
+            } else if (owner == R.drawable.private_list_owner3 && MainActivity.curr_user.equals("Zach")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Zach");
+            } else if (owner == R.drawable.private_list_owner4 && MainActivity.curr_user.equals("Matarr")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Matarr");
             } else {
                 switch_list_button.setVisibility(View.GONE);
                 remove_button.setVisibility(View.GONE);
                 increase_button.setVisibility(View.GONE);
                 decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 4");
+                if (owner == R.drawable.private_list_owner1) {
+                    food_owner.setText("Charlie");
+                } else if (owner == R.drawable.private_list_owner2) {
+                    food_owner.setText("Max");
+                } else if (owner == R.drawable.private_list_owner3) {
+                    food_owner.setText("Zach");
+                } else {
+                    food_owner.setText("Matarr");
+                }
+
             }
         } else {
             privateList = false;
@@ -327,9 +355,9 @@ public class FridgeFragment extends Fragment {
             }
         } else if (name.equalsIgnoreCase("Burger")) {
             if (privateList) {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSodium: 396mg \nFat: 10.1g \nCarbs: 30.3g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSodium: 0.4g \nFat: 10.1g \nCarbs: 30.3g");
             } else {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSugar: 396mg \nFat: 10.1g \nCarbs: 30.3g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-4 Days" + "\n\nCalories: 266 \nSugar: 0.4g \nFat: 10.1g \nCarbs: 30.3g");
             }
         } else if (name.equalsIgnoreCase("Cake")) {
             if (privateList) {
@@ -345,9 +373,9 @@ public class FridgeFragment extends Fragment {
             }
         } else if (name.equalsIgnoreCase("Cheese")) {
             if (privateList) {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 180mg");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 0.2g");
             } else {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 180mg");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 2-3 Weeks" + "\n\nCalories: 120 \nProtein: 8g \nFat: 6g \nCalcium: 0.2g");
             }
         } else if (name.equalsIgnoreCase("Cookie")) {
             if (privateList) {
@@ -375,9 +403,9 @@ public class FridgeFragment extends Fragment {
             }
         } else if (name.equalsIgnoreCase("Milk")) {
             if (privateList) {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 300mg");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 0.3g");
             } else {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 300mg");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1 Week" + "\n\nCalories: 146 \nProtein: 8g \nFat: 8g \nCalcium: 0.3g");
             }
         } else if (name.equalsIgnoreCase("Olive Oil")) {
             if (privateList) {
@@ -405,9 +433,9 @@ public class FridgeFragment extends Fragment {
             }
         } else if (name.equalsIgnoreCase("Raw Beef")) {
             if (privateList) {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 66mg \nFat: 20g \nCarbs: 0g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 0.1g \nFat: 20g \nCarbs: 0g");
             } else {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 66mg \nFat: 20g \nCarbs: 0g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 3-5 Days" + "\n\nCalories: 267 \nSodium: 0.1g \nFat: 20g \nCarbs: 0g");
             }
         } else if (name.equalsIgnoreCase("Salt")) {
             if (privateList) {
@@ -423,9 +451,15 @@ public class FridgeFragment extends Fragment {
             }
         } else if (name.equalsIgnoreCase("Strawberry")) {
             if (privateList) {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 32 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 4 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
             } else {
-                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 32 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 5-7 Days" + "\n\nCalories: 4 \nSugar: 4.9g \nFat: 0.3g \nCarbs: 7.7g");
+            }
+        } else if (name.equalsIgnoreCase("Tomato")) {
+            if (privateList) {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.private_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Weeks" + "\n\nCalories: 20 \nSugar: 2.4g \nFat: 0.2g \nCarbs: 3.5g");
+            } else {
+                food_nutrition.setText("\nPurchase Date: " + MainActivity.communal_purchase_dates[index] + "\nEstimated Shelf Life: 1-2 Weeks" + "\n\nCalories: 20 \nSugar: 2.4g \nFat: 0.2g \nCarbs: 3.5g");
             }
         } else if (name.equalsIgnoreCase("Watermelon")) {
             if (privateList) {
