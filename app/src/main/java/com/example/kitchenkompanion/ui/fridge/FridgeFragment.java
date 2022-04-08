@@ -26,6 +26,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -90,6 +91,8 @@ public class FridgeFragment extends Fragment {
         binding = FragmentFridgeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         view1 = root;
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
         //create options menu for direct add and search buttons
         setHasOptionsMenu(true);
@@ -189,10 +192,21 @@ public class FridgeFragment extends Fragment {
                     emptyTextPopup();
                 } else if (private_list == true) {
                     boolean dupe_found = false;
-                    //check if duplicate belongs to user 1
+                    //check if duplicate belongs to curr user
+                    int curr_user_background;
+                    if (MainActivity.curr_user.equals("Charlie")) {
+                        curr_user_background = R.drawable.private_list_owner1;
+                    } else if (MainActivity.curr_user.equals("Max")) {
+                        curr_user_background = R.drawable.private_list_owner2;
+                    } else if (MainActivity.curr_user.equals("Zach")) {
+                        curr_user_background = R.drawable.private_list_owner3;
+                    } else {
+                        curr_user_background = R.drawable.private_list_owner4;
+                    }
+
                     for (int i = 0; i < MainActivity.private_items.length; i++) {
                         if (MainActivity.private_items[i].equals(item_name)
-                                &&  MainActivity.private_owner_images[i] == R.drawable.private_list_owner1) {
+                                &&  MainActivity.private_owner_images[i] == curr_user_background) {
                             dupe_found = true;
                             break;
                         }
@@ -250,30 +264,57 @@ public class FridgeFragment extends Fragment {
 
         boolean privateList = false;
 
+        switch_list_button.setVisibility(View.GONE);
+        remove_button.setVisibility(View.GONE);
+        increase_button.setVisibility(View.GONE);
+        decrease_button.setVisibility(View.GONE);
+
         //get communal or private list and owner
         if (owner != R.drawable.communal_list_item) {
             privateList = true;
-            if (owner == R.drawable.private_list_owner1) {
+            if (owner == R.drawable.private_list_owner1 && MainActivity.curr_user.equals("Charlie")) {
                 switch_list_button.setText("Switch to Communal");
-                food_owner.setText("User 1");
-            } else if (owner == R.drawable.private_list_owner2) {
-                switch_list_button.setVisibility(View.GONE);
-                remove_button.setVisibility(View.GONE);
-                increase_button.setVisibility(View.GONE);
-                decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 2");
-            } else if (owner == R.drawable.private_list_owner3) {
-                switch_list_button.setVisibility(View.GONE);
-                remove_button.setVisibility(View.GONE);
-                increase_button.setVisibility(View.GONE);
-                decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 3");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Charlie");
+            } else if (owner == R.drawable.private_list_owner2 && MainActivity.curr_user.equals("Max")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Max");
+            } else if (owner == R.drawable.private_list_owner3 && MainActivity.curr_user.equals("Zach")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Zach");
+            } else if (owner == R.drawable.private_list_owner4 && MainActivity.curr_user.equals("Matarr")) {
+                switch_list_button.setText("Switch to Communal");
+                switch_list_button.setVisibility(View.VISIBLE);
+                remove_button.setVisibility(View.VISIBLE);
+                increase_button.setVisibility(View.VISIBLE);
+                decrease_button.setVisibility(View.VISIBLE);
+                food_owner.setText("Matarr");
             } else {
                 switch_list_button.setVisibility(View.GONE);
                 remove_button.setVisibility(View.GONE);
                 increase_button.setVisibility(View.GONE);
                 decrease_button.setVisibility(View.GONE);
-                food_owner.setText("User 4");
+                if (owner == R.drawable.private_list_owner1) {
+                    food_owner.setText("Charlie");
+                } else if (owner == R.drawable.private_list_owner2) {
+                    food_owner.setText("Max");
+                } else if (owner == R.drawable.private_list_owner3) {
+                    food_owner.setText("Zach");
+                } else {
+                    food_owner.setText("Matarr");
+                }
+
             }
         } else {
             privateList = false;
