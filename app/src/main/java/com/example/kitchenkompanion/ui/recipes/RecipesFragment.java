@@ -1,12 +1,15 @@
 package com.example.kitchenkompanion.ui.recipes;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,14 +29,12 @@ public class RecipesFragment extends Fragment {
 
     private FragmentRecipesBinding binding;
 
-    Button filterButton;
+    ListView listview;
+
+    //Parameters for the explore button
+    Button exploreButton;
     AlertDialog.Builder dialogBuilder;
     Context context;
-
-    private EditText direct_name, direct_count;
-    private Button direct_add_cancel, direct_add_save;
-    private ToggleButton direct_add_toggle;
-    private Spinner counter_dropdown;
     private AlertDialog dialog;
 
 
@@ -48,9 +49,9 @@ public class RecipesFragment extends Fragment {
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
-        ListView listView = (ListView) root.findViewById(R.id.recipe_list);
-        filterButton = root.findViewById(R.id.filterButton);
-        filterButton.setOnClickListener(new View.OnClickListener() {
+        //Configure the Explore Button
+        exploreButton = root.findViewById(R.id.exploreButton);
+        exploreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogBuilder = new AlertDialog.Builder(context);
@@ -63,10 +64,18 @@ public class RecipesFragment extends Fragment {
 
             }
         });
+
+        //Configure the list view
+        listview = (ListView) root.findViewById(R.id.recipe_list);
         RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipes, MainActivity.communal_owner_images);
-
-        listView.setAdapter(rla);
-
+        listview.setAdapter(rla);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(context,RecipeActivity.class);
+                startActivity(intent);
+            }
+        });
         return root;
     }
 

@@ -40,7 +40,6 @@
         android:dropDownVerticalOffset="30dp"
         android:entries="@array/meal"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_text" />
@@ -53,6 +52,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="105dp"
         android:text="Novice"
+        android:textColor="@color/black"
         android:backgroundTint="@color/green"
         app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +70,7 @@
         app:flow_horizontalAlign="center"
         android:backgroundTint="@color/yellow"
         app:flow_verticalAlign="center"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -82,6 +83,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="105dp"
         android:text="Advanced"
+        android:textColor="@color/black"
         android:backgroundTint="@color/red"
         app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
