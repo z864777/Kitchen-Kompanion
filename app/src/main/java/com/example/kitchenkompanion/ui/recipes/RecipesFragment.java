@@ -67,7 +67,7 @@ public class RecipesFragment extends Fragment {
 
         //Configure the list view
         listview = (ListView) root.findViewById(R.id.recipe_list);
-        RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipes, MainActivity.communal_owner_images);
+        RecipeListAdapter rla = new RecipeListAdapter(getActivity(), MainActivity.recipe_names, MainActivity.list_images, MainActivity.recipe_image, MainActivity.recipe_list);
         listview.setAdapter(rla);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,6 +75,8 @@ public class RecipesFragment extends Fragment {
                 Intent intent = new Intent(context,RecipeActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("recipe_name", rla.getItem(i));
+                bundle.putInt("food_pic", rla.getFoodPic(i));
+                bundle.putInt("recipe_pic", rla.getRecipePic(i));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

@@ -16,25 +16,25 @@
         android:text="TextView"
         android:textColor="@color/purple_500"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/picture"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="130dp"
         android:layout_marginEnd="131dp"
         android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/recipe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/chocolate_chip_pancakes_recipe" />
+        app:srcCompat="@drawable/recipe_pancakes_image" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/recipe"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_marginStart="5dp"
@@ -43,6 +43,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/pancake_recipe" />
+        app:srcCompat="@drawable/recipe_pancake" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
