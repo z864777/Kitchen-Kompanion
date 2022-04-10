@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,19 @@ public class UserFragment extends Fragment {
 
         EditText username = root.findViewById(R.id.username);
         EditText password = root.findViewById(R.id.password);
+        TextView current_user = root.findViewById(R.id.current_user_text_var);
+        ImageView current_user_image = root.findViewById(R.id.curret_user_image_var);
+
+        current_user.setText(MainActivity.curr_user);
+        if (MainActivity.curr_user.equals("Charlie")) {
+            current_user_image.setImageResource(R.drawable.private_list_owner1);
+        } else if (MainActivity.curr_user.equals("Max")) {
+            current_user_image.setImageResource(R.drawable.private_list_owner2);
+        } else if (MainActivity.curr_user.equals("Zach")) {
+            current_user_image.setImageResource(R.drawable.private_list_owner3);
+        } else {
+            current_user_image.setImageResource(R.drawable.private_list_owner4);
+        }
 
         MaterialButton loginbtn = root.findViewById(R.id.loginbtn);
 
@@ -47,21 +61,39 @@ public class UserFragment extends Fragment {
                     //correct
                     Toast.makeText(getActivity(),"LOGIN SUCCESSFUL, WELCOME CHARLIE",Toast.LENGTH_SHORT).show();
                     MainActivity.curr_user = "Charlie";
+                    username.setText("");
+                    password.setText("");
+                    current_user.setText(MainActivity.curr_user);
+                    current_user_image.setImageResource(R.drawable.private_list_owner1);
                 }else if(username.getText().toString().equalsIgnoreCase("Max") && password.getText().toString().equals("user2")){
                     //correct
                     Toast.makeText(getActivity(),"LOGIN SUCCESSFUL, WELCOME MAX",Toast.LENGTH_SHORT).show();
                     MainActivity.curr_user = "Max";
+                    username.setText("");
+                    password.setText("");
+                    current_user.setText(MainActivity.curr_user);
+                    current_user_image.setImageResource(R.drawable.private_list_owner2);
                 }else if(username.getText().toString().equalsIgnoreCase("Zach") && password.getText().toString().equals("user3")){
                     //correct
                     Toast.makeText(getActivity(),"LOGIN SUCCESSFUL, WELCOME ZACH",Toast.LENGTH_SHORT).show();
                     MainActivity.curr_user = "Zach";
+                    username.setText("");
+                    password.setText("");
+                    current_user.setText(MainActivity.curr_user);
+                    current_user_image.setImageResource(R.drawable.private_list_owner3);
                 }else if(username.getText().toString().equalsIgnoreCase("Matarr") && password.getText().toString().equals("user4")){
                     //correct
                     Toast.makeText(getActivity(),"LOGIN SUCCESSFUL, WELCOME MATARR",Toast.LENGTH_SHORT).show();
                     MainActivity.curr_user = "Matarr";
+                    username.setText("");
+                    password.setText("");
+                    current_user.setText(MainActivity.curr_user);
+                    current_user_image.setImageResource(R.drawable.private_list_owner4);
                 }else
                     //incorrect
                     Toast.makeText(getActivity(),"LOGIN FAILED. INCORRECT USERNAME OR PASSWORD",Toast.LENGTH_SHORT).show();
+                    username.setText("");
+                    password.setText("");
             }
         });
 
