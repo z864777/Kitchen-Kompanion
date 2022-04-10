@@ -185,12 +185,13 @@ public class FridgeFragment extends Fragment {
                 if (item_counter.equals("None")) {
                     item_counter = " ";
                 }
-                item_count = item_count + " " + item_counter;
+
                 Boolean private_list = direct_add_toggle.isChecked();
                 //if empty info, create warning
                 if (item_name.isEmpty()|| item_count.isEmpty()) {
                     emptyTextPopup();
                 } else if (private_list == true) {
+                    item_count = item_count + " " + item_counter;
                     boolean dupe_found = false;
                     //check if duplicate belongs to curr user
                     int curr_user_background;
