@@ -73,6 +73,9 @@ public class RecipesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(context,RecipeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("recipe_name", rla.getItem(i));
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

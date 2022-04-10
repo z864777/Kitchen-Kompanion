@@ -37,7 +37,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="115dp"
-        android:dropDownVerticalOffset="30dp"
+        android:dropDownVerticalOffset="32dp"
         android:entries="@array/meal"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"

@@ -31,7 +31,7 @@ public class RecipeListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public String getItem(int i) {
         return recipes[i];
     }
 
