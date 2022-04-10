@@ -1,15 +1,12 @@
 package com.example.kitchenkompanion.ui.recipes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +15,7 @@ import com.example.kitchenkompanion.R;
 public class RecipeActivity extends AppCompatActivity {
     Context context;
     TextView title;
+    ImageView food_image, recipe_image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +28,13 @@ public class RecipeActivity extends AppCompatActivity {
         //Recieve arguments from other class
         Bundle bundle = getIntent().getExtras();
         String recipe_name = bundle.getString("recipe_name");
+        int food_pic = bundle.getInt("food_pic");
+        int recipe_pic = bundle.getInt("recipe_pic");
         title.setText(recipe_name);
+        food_image = (ImageView)findViewById(R.id.picture);
+        food_image.setImageResource(food_pic);
+        recipe_image = (ImageView) findViewById(R.id.recipe);
+        recipe_image.setImageResource(recipe_pic);
 
     }
 
