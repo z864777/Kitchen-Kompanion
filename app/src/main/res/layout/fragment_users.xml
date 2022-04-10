@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".ui.users.UserFragment">
 
     <TextView
@@ -16,62 +16,69 @@
         android:layout_marginEnd="30dp"
         android:gravity="center"
         android:text="Current User:"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="35dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/curret_user_image_var"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:layout_below="@id/current_user"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_user" />
 
     <TextView
         android:id="@+id/current_user_text_var"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/current_user"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
         android:text="Placeholder"
-        android:textColor="#0000FF"
+        android:textColor="@color/purple_700"
         android:textSize="35dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/curret_user_image_var"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_user" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/current_user_text_var"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_user_text_var" />
 
     <TextView
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/current_user_text_var"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="30dp"
         android:gravity="center"
         android:text="Sign In"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="35dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_user_text_var" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signin"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="#30ffffff"
+        android:layout_margin="10dp"
+        android:background="@color/purple_500"
         android:drawableLeft="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="20dp"
         android:hint="Username"
@@ -79,83 +86,95 @@
         android:inputType="text"
         android:padding="20dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signin" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:layout_below="@id/username"
-        android:background="#30ffffff"
-        android:hint="Password"
-        android:textColorHint="@color/white"
-        android:textColor="@color/white"
         android:layout_margin="10dp"
-        android:padding="20dp"
+        android:background="@color/purple_500"
         android:drawableLeft="@drawable/ic_baseline_lock_outline"
         android:drawablePadding="20dp"
+        android:hint="Password"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
-        android:imeOptions="actionDone" />
+        android:padding="20dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/purple_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/password"
-        android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="LOGIN" />
+        android:text="LOGIN"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/forgotpass"
-        android:layout_below="@id/loginbtn"
-        android:text="Forgot password?"
-        android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/others"
-        android:layout_below="@id/forgotpass"
-        android:text="or sign in with"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Forgot password?"
+        android:textColor="@color/purple_200"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginbtn" />
+
+    <TextView
+        android:id="@+id/others"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="or sign in with"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forgotpass" />
 
 
     <LinearLayout
+        android:id="@+id/socialicons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/socialicons"
         android:layout_marginBottom="50dp"
-        android:layout_below="@id/others"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/others">
 
 
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/google"/>
+            android:src="@drawable/google" />
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/fb"/>
+            android:src="@drawable/fb" />
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
-            android:src="@drawable/twitter"/>
+            android:src="@drawable/twitter" />
 
     </LinearLayout>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

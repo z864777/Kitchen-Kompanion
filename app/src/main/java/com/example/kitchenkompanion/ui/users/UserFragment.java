@@ -24,6 +24,11 @@ public class UserFragment extends Fragment {
 
     private FragmentUsersBinding binding;
 
+    EditText username;
+    EditText password;
+    TextView current_user;
+    ImageView current_user_image;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         UserViewModel UserViewModel =
@@ -32,12 +37,12 @@ public class UserFragment extends Fragment {
         binding = FragmentUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
 
-        EditText username = root.findViewById(R.id.username);
-        EditText password = root.findViewById(R.id.password);
-        TextView current_user = root.findViewById(R.id.current_user_text_var);
-        ImageView current_user_image = root.findViewById(R.id.curret_user_image_var);
+        username = root.findViewById(R.id.username);
+        password = root.findViewById(R.id.password);
+        current_user = root.findViewById(R.id.current_user_text_var);
+        current_user_image = root.findViewById(R.id.curret_user_image_var);
 
         current_user.setText(MainActivity.curr_user);
         if (MainActivity.curr_user.equals("Charlie")) {
