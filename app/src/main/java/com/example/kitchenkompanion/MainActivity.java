@@ -23,6 +23,66 @@ public class MainActivity extends AppCompatActivity {
     public static int recipe_list[] = {R.drawable.recipe_pancake, R.drawable.recipe_tacomeat, R.drawable.recipe_lasagna, R.drawable.recipe_bananabread, R.drawable.recipe_macandcheese,
             R.drawable.recipe_chickenparm, R.drawable.recipe_waffles, R.drawable.recipe_bakedpotato, R.drawable.recipe_chickenpotpie};
 
+    public static String breakfast_names[] = {"Chocolate Chip Pancakes", "Waffles"};
+    public static int breakfast_list_image[] = {R.drawable.private_list_owner4, R.drawable.private_list_owner3};
+    public static int breakfast_recipe_image[] = {R.drawable.recipe_pancakes_image, R.drawable.recipe_waffles_image};
+    public static int breakfast_recipe_list[] = {R.drawable.recipe_pancake, R.drawable.recipe_waffles};
+
+    //novice breakfast
+    public static String novice_breakfast_names[] = {};
+    public static int novice_breakfast_list_image[] = {};
+    public static int novice_breakfast_recipe_image[] = {};
+    public static int novice_breakfast_recipe_list[] = {};
+
+    //intermediate breakfast
+    public static String intermediate_breakfast_names[] = {"Chocolate Chip Pancakes"};
+    public static int intermediate_breakfast_list_image[] = {R.drawable.private_list_owner4};
+    public static int intermediate_breakfast_recipe_image[] = {R.drawable.recipe_pancakes_image};
+    public static int intermediate_breakfast_recipe_list[] = {R.drawable.recipe_pancake};
+
+    //advanced breakfast
+    public static String advanced_breakfast_names[] = {"Waffles"};
+    public static int advanced_breakfast_list_image[] = {R.drawable.private_list_owner4};
+    public static int advanced_breakfast_recipe_image[] = {R.drawable.recipe_waffles_image};
+    public static int advanced_breakfast_recipe_list[] = {R.drawable.recipe_waffles};
+
+    //novice lunch
+    public static String novice_lunch_names[] = {};
+    public static int novice_lunch_list_image[] = {};
+    public static int novice_lunch_recipe_image[] = {};
+    public static int novice_lunch_recipe_list[] = {};
+
+    //intermediate lunch
+    public static String intermediate_lunch_names[] = {"Banana Bread"};
+    public static int intermediate_lunch_list_image[] = {R.drawable.private_list_owner4};
+    public static int intermediate_lunch_recipe_image[] = {R.drawable.recipe_bananabread_image};
+    public static int intermediate_lunch_recipe_list[] = {R.drawable.recipe_bananabread};
+
+    //advanced lunch
+    public static String advanced_lunch_names[] = {};
+    public static int advanced_lunch_list_image[] = {};
+    public static int advanced_lunch_recipe_image[] = {};
+    public static int advanced_lunch_recipe_list[] = {};
+
+    //novice dinner
+    public static String novice_dinner_names[] = {"Baked Potato"};
+    public static int novice_dinner_list_image[] = {R.drawable.private_list_owner2};
+    public static int novice_dinner_recipe_image[] = {R.drawable.recipe_bakedpotato_image};
+    public static int novice_dinner_recipe_list[] = {R.drawable.recipe_bakedpotato};
+
+    //intermediate dinner
+    public static String intermediate_dinner_names[] = {"Taco Meat", "Homemade Mac and Cheese", };
+    public static int intermediate_dinner_list_image[] = {R.drawable.private_list_owner4, R.drawable.private_list_owner4};
+    public static int intermediate_dinner_recipe_image[] = {R.drawable.recipe_bakedpotato_image, R.drawable.recipe_macandcheese_image};
+    public static int intermediate_dinner_recipe_list[] = {R.drawable.recipe_bakedpotato, R.drawable.recipe_macandcheese};
+
+    //advanced dinner
+    public static String advanced_dinner_names[] = {"Lasagna", "Chicken Parmesan", "Chicken Pot Pie"};
+    public static int advanced_dinner_list_image[] = {R.drawable.private_list_owner3, R.drawable.private_list_owner3, R.drawable.private_list_owner3};
+    public static int advanced_dinner_recipe_image[] = {R.drawable.recipe_lasagna_image, R.drawable.recipe_chickenparmesan_image, R.drawable.recipe_chickenpotpie_image};
+    public static int advanced_dinner_recipe_list[] = {R.drawable.recipe_lasagna, R.drawable.recipe_chickenparm, R.drawable.recipe_chickenpotpie};
+    //int
+
     //Arrays for storing information in fridge list.
     //Can be accessed by any fragment
     //Data saved globally across entire app
